@@ -18,7 +18,7 @@ class StandartController extends Controller
     public function index()
     {
         //Eloquent
-        $standarts = Standart::all();
+        $standarts = Standart::paginate(8);
 //          Session::flash('message', 'List updated');
 
   //      return view('tables/standarts/index', ['standarts' => $standarts]);
@@ -115,13 +115,14 @@ class StandartController extends Controller
             $standart = Standart::find($id);
 
 
-        $standart->name = $request->input('name');
+            $standart->name = $request->input('name');
+            $standart->batch = $request->batch;
             $standart->producer = $request->producer;
             $standart->package = $request->package;
             $standart->quantity = $request->quantity;
             $standart->expire_date = $request->expire_date;
 
-        if ($standart->quality_docs == NULL)
+        if (!empty($standart->quality_docs) )
         $standart->quality_docs = $request->input('quality_docs');
         }
 
@@ -145,8 +146,5 @@ class StandartController extends Controller
         return redirect()->route('standarts.index');
     }
 
-    public function saveFileName()
-    {
-        
-    }
+
 }

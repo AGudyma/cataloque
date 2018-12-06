@@ -11,17 +11,23 @@ class UploadfileController extends Controller
         return view('upload');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function upload(Request $request)
     {
-//        $this->validate($request, [
-//            'select_file'  => 'required|image|mimes:jpg,png,gif,pdf|max:2048'
-//        ]);
+        $this->validate($request, [
+            'select_file'  => 'required|image:jpg,png,gif'
+        ]);
 
-        $image = $request->file('select_file');
+            $image = $request->file('select_file');
 
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $new_name);
 
-        $image->move(public_path('images'), $new_name);
+
+
         return back()->with('success', 'Image Uploaded Successfully')->with('path', $new_name);
     }
 }

@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Laravel Catalogue</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -85,8 +85,9 @@
                 <div class="links">
                     <a href="/about">About</a>
                     <a href="standarts">Standarts</a>
-                    {{--<a href="reagents">Reagents</a>--}}
-                    {{--<a href="labware">labware</a>--}}
+                    <a href="reagents">Reagents</a>
+                    <a href="columns">Columns</a>
+                    <a href="labware">labware</a>
                     <a href="/Links">Links</a>
                 </div>
             </div>

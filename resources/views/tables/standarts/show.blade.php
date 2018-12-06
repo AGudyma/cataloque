@@ -35,24 +35,28 @@
 
         </table>
     </div>
-{{--{{$standart->name}}--}}
 
-<img src="/images/{{$standart->quality_docs}}" width="300" class="img-thumbnail"/>
-<br/>
-<a class="btn btn-default" href="/standarts/{{$standart->id}}/edit" role="button">edit item</a>
+        <img src="/images/{{$standart->quality_docs}}" width="300" class="img-thumbnail"/>
+        <br/>
 
+    @if (auth()->user()->admin == 0 ? 'User': 'Admin')
 
+        <div>
+                <a class="btn btn-default" href="/standarts/{{$standart->id}}/edit" role="button">edit item</a></div>
+            <form method="post" action="{{action('StandartController@destroy',$standart->id)}}">
+                {{ csrf_field() }}
+                <input type="hidden" name="_method" value="DELETE"/>
+                <button type="submit" class="btn-danger">Delete item</button>
 
-<form method="post" action="{{action('StandartController@destroy',$standart->id)}}">
-    {{ csrf_field() }}
-    <input type="hidden" name="_method" value="DELETE"/>
-    <button type="submit" class="btn-danger">Delete item</button>
+            </form>
+        </div>
+    @endif
 
-</form>
     <div >
         <a href="http://catalogue/standarts" role="button" class="btn btn-success">back to item list</a>
     </div>
-</div>
+
+</body>
 <?php
 
 /**

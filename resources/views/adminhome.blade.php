@@ -33,6 +33,7 @@
                                     <td>{{ $value->email }}</td>
                                 </tr>
                             @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -40,4 +41,54 @@
             </div>
         </div>
     </div>
+    <div>
+            <?php
+        use Illuminate\Support\Facades\DB;
+            //retrieve file names
+        $images_in_buffer = scandir('C:\OSPanel\domains\Catalogue\public\images');
+//            var_dump($images_in_buffer);
+
+            $images_in_DB = DB::table('standarts')->select('quality_docs')->get();
+           echo '<br>';
+//            print $images_in_DB.'["items":protected]'."[0]";
+            $ArrayFromDB = Array($images_in_DB . '["items":protected]' . "[0]");
+                var_dump($ArrayFromDB);
+            foreach ($ArrayFromDB as $key => $value) {
+                $imagesListDB = $value;
+            }
+            var_dump($imagesListDB);
+
+//            delete files
+        foreach (glob("*.jpg") as $filename) {
+            echo "$filename size " . filesize($filename) . "\n";
+            unlink($filename);
+        }
+
+
+
+        ?>
+
+
+
+
+                {{--<table class="table table-hover table-bordered">--}}
+                    {{--<thead>--}}
+                    {{--<tr>--}}
+                        {{--<th id</th>--}}
+                        {{--<th>images in buffer</th>--}}
+
+                    {{--</tr>--}}
+                    {{--</thead>--}}
+                    {{--<tbody>--}}
+                    {{--@foreach ($images_in_buffer as $key => $value)--}}
+                        {{--<tr>--}}
+                            {{--<td>{{ $key }}</td>--}}
+                            {{--<td>{{ $value }}</td>--}}
+                        {{--</tr>--}}
+                    {{--@endforeach--}}
+
+                    {{--</tbody>--}}
+                {{--</table>--}}
+    </div>
+
 @endsection
