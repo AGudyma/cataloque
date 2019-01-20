@@ -53,7 +53,10 @@ class ReagentController extends Controller
         $reagent->quantity = $request->quantity;
         $reagent->expire_date = $request->expire_date;
 
-        $reagent->quality_docs = $request->quality_docs;
+//        $reagent->quality_docs = $request->quality_docs;
+        $image = $request->file('quality_docs');
+        $new_name = rand() . $image->getClientOriginalExtension();
+
         $reagent->save();
 //        Session::flash('message', 'Successfully created item!');
 //          Session::flash('message', 'Successfully created nerd!');

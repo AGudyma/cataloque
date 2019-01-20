@@ -6,7 +6,7 @@
     <a href="/" class="btn btn-success" role="button">Homepage</a>
 </div>
 <div class="container">
-    <form action="{{url('reagents')}}" method="post">
+    <form action="{{url('reagents')}}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         Name:<br>
         <input type="text" name="name" placeholder="name" required><br>
@@ -24,11 +24,11 @@
         {{--Quantity:<br>--}}
         {{--<input type="text" name="quantity" placeholder="quantity"><br>--}}
 
-        {{--Exp Date:<br>--}}
-        {{--<input type="text" name="expire_date" placeholder="exp Date"><br>--}}
+        Exp Date:<br>
+        <input type="date" name="expire_date" placeholder="exp Date" required><br>
 
         {{--CoA:<br>--}}
-        <input type="hidden" name="quality_docs" value="{{ Session::get('path') }}" placeholder="UploadedfileName"><br>
+        <input type="file" name="quality_docs" placeholder="UploadedfileName"><br>
 
         <input class="btn btn-default" type="submit" value="Submit">
 

@@ -32,49 +32,16 @@ Route::get('/uploadfile', 'UploadfileController@index');
 Route::post('/uploadfile', 'UploadfileController@upload');
 //Search routes
 
-
-//Route::any(/**
-// * @return mixed
-// */
-//    '/search', function ()
-//{
-//
-//    $search_request = Input::get ( 'search_request');
-//
-//    /** @var TYPE_NAME $table */
-//    switch (    $table = Input::get('table')) {
-//        case "standarts":
-//            $standarts = (new App\Standart)->where('name','LIKE','%'.$search_request.'%')->get();
-//            if(count($standarts) > 0)
-//                return view('/search/search',['table' => $table])->withDetails($standarts)->withQuery ( $search_request );
-//
-//        break;
-//        case "reagents":
-//            $reagents = (new App\Reagent)->where('name','LIKE','%'.$search_request.'%')->get();
-//            if(count($reagents) > 0)
-//                return view('/search/search')->withDetails($reagents)->withQuery ( $search_request );
-//        break;
-//        case "columns":
-//            $columns = (new App\Column)->where('name','LIKE','%'.$search_request.'%')->get();
-//            if(count($columns) > 0)
-//                return view('/search/search',['table' => $table])->withDetails($columns)->withQuery ( $search_request );
-//        break;
-//
-//        default:
-//            return view ('/search/search')->withMessage('No Details found. Try to search again !');
-//    }
-//});
-
 Route::any(
     '/search', 'SearchController@search');
-
+//barcode routes
+Route::any('barcode', function (){
+    return view('barcode/decode');
+});
 
 
 //Auth routes
 Auth::routes();
-
-
-
 
 Route::group(['middleware' => ['web','auth']], function(){
     Route::get('/', function () {

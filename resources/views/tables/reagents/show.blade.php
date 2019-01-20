@@ -20,8 +20,6 @@
                     <td width="10%" align="center"><label>created_at </label> {{$reagent->created_at}}</td>
 
 
-                    {{--<td width="30"><span class="text-muted">jpg, png, gif</span></td>--}}
-                    {{--<td width="30%" align="left"></td>--}}
                 </tr>
 
             </table>
@@ -33,6 +31,7 @@
         @if (auth()->user()->admin == 0 ? 'User': 'Admin')
 
             <div>
+
                     <a class="btn btn-default" href="/reagents/{{$reagent->id}}/edit" role="button">edit item</a></div>
                 <form method="post" action="{{action('StandartController@destroy',$reagent->id)}}">
                     {{ csrf_field() }}
@@ -47,7 +46,9 @@
         <a href="http://catalogue/reagents" role="button" class="btn btn-success">back to reagents list</a>
     </div>
 
-    </body>
+    <div>
+        {{ 'Hello, ' }}{!! auth()->user()->admin == 0 ? 'User': 'Admin'!!}
+    </div>
 </div>
 
 

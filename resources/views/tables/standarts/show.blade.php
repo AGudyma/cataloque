@@ -39,7 +39,7 @@
         <img src="/images/{{$standart->quality_docs}}" width="300" class="img-thumbnail"/>
         <br/>
 
-    @if (auth()->user()->admin == 0 ? 'User': 'Admin')
+    @if (auth()->user()->admin == 1 )
 
         <div>
                 <a class="btn btn-default" href="/standarts/{{$standart->id}}/edit" role="button">edit item</a></div>
@@ -51,17 +51,16 @@
             </form>
         </div>
     @endif
+    @if (auth()->user()->admin == 0 )
+
+        <div>
+            <a class="btn btn-default" href="/standarts/{{$standart->id}}/edit" role="button">change quantity</a></div>
+
+        </div>
+    @endif
+
 
     <div >
         <a href="http://catalogue/standarts" role="button" class="btn btn-success">back to item list</a>
     </div>
-
-</body>
-<?php
-
-/**
- * Created by PhpStorm.
- * User: napal
- * Date: 13.11.2018
- * Time: 00:15
- */
+<body/>

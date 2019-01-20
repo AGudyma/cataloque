@@ -2,36 +2,57 @@
 @section('header')
 @stop
 
-    <div class="container">
-        <form method="post" action="{{action('ReagentController@update',$reagent->id)}}" >
-            {{ csrf_field() }}
-            Name:<br>
-            <input type="hidden" name="_method" value="PATCH">
-            <input type="text" name="name" value="{{$reagent->name}}" >
-            <br>
+    @if( auth()->user()->admin == 1 )
+        <div class="container">
 
-            batch:<br>
-            <input type="text" name="batch" value="{{$reagent->batch}}"><br>
+            <form method="post" action="{{action('ReagentController@update',$reagent->id)}}" >
+                {{ csrf_field() }}
+                Name:<br>
+                <input type="hidden" name="_method" value="PATCH">
+                <input type="text" name="name" value="{{$reagent->name}}" >
+                <br>
 
-            Producer:<br>
-            <input type="text" name="producer" value="{{$reagent->producer}}"><br>
+                batch:<br>
+                <input type="text" name="batch" value="{{$reagent->batch}}"><br>
 
-            Package:<br>
-            <input type="text" name="package" value="{{$reagent->package}}"><br>
+                Producer:<br>
+                <input type="text" name="producer" value="{{$reagent->producer}}"><br>
 
-            Quantity:<br>
-            <input type="text" name="quantity" value="{{$reagent->quantity}}"><br>
+                Package:<br>
+                <input type="text" name="package" value="{{$reagent->package}}"><br>
 
-            Exp Date:<br>
-            <input type="text" name="expire_date"  value="{{$reagent->expire_date}}"><br>
+                Quantity:<br>
+                <input type="text" name="quantity" value="{{$reagent->quantity}}"><br>
 
-            Quality Documents:<br>
-            <input type="hidden" name="_method" value="PATCH">
-            <input type="hidden" name="quality_docs" value="{{ Session::get('path') }}" placeholder="quality_docs"><br>
-            {{ Session::get('path') }}
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+                Exp Date:<br>
+                <input type="text" name="expire_date"  value="{{$reagent->expire_date}}"><br>
+
+                Quality Documents:<br>
+                <input type="hidden" name="_method" value="PATCH">
+                <input type="hidden" name="quality_docs" value="{{ Session::get('path') }}" placeholder="quality_docs"><br>
+                {{ Session::get('path') }}
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    @endif
+
+    @if( auth()->user()->admin == 0 )
+        <div class="container">
+            {{ 'Hello, ' }}{!! auth()->user()->admin == 0 ? 'User': 'Admin'!!}
+            <form method="post" action="{{action('ReagentController@update',$reagent->id)}}" >
+                {{ csrf_field() }}
+                Name:<br>
+                <input type="hidden" name="_method" value="PATCH">
+
+
+                Quantity:<br>
+                <input type="text" name="quantity" value="{{$reagent->quantity}}"><br>
+
+
+            </form>
+        </div>
+    @endif
+    {{ 'Hello, ' }}{!! auth()->user()->admin == 0 ? 'User': 'Admin'!!}
     <div>
         <form method="post" action="{{url('/uploadfile')}}" enctype="multipart/form-data">
             {{ csrf_field() }}
@@ -44,7 +65,7 @@
                     </tr>
                     <tr>
                         <td width="40%" align="right"></td>
-                        <td width="30"><span class="text-muted">jpg, png, gif</span></td>
+                        <td width="30"><span class="text-muted">jpg, png, gif, pdf</span></td>
                         <td width="30%" align="left"></td>
                     </tr>
                 </table>

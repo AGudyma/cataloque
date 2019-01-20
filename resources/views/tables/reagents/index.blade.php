@@ -36,5 +36,6 @@
 
     </table>
     {!! $reagents->links() !!}
+
 </div>
 

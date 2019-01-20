@@ -18,7 +18,7 @@ class UploadfileController extends Controller
     function upload(Request $request)
     {
         $this->validate($request, [
-            'select_file'  => 'required|image:jpg,png,gif'
+            'select_file'  => 'required|image:jpg,png,gif,pdf'
         ]);
 
             $image = $request->file('select_file');
